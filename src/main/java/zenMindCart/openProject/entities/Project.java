@@ -18,7 +18,7 @@ public class Project {
     @Column(name = "project_id")
     private int id;
 
-    private String name;
+    private String title;
 
     private Status status;
 
