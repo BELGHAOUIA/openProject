@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum NodeType {
-    TEXT_NODE("Text Node"),
-    IMAGE_NODE("Image Node");
+public enum Status {
+    NOT_FINISHED("Pending"),
+    FINISHED("Completed");
 
     private final String name;
 }
