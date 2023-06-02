@@ -24,8 +24,7 @@ public class Node {
     private Color borderColor;
     private int borderSize;
 
-    @OneToOne
-    @JoinColumn(name = "project_id")
+    @OneToOne(mappedBy = "parentNode")
     private Project project;
 
 }
