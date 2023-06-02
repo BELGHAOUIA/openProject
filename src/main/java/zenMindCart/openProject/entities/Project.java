@@ -5,26 +5,18 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.awt.*;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Node {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "node_id")
+    @Column(name = "project_id")
     private int id;
 
-    private float containerWidth;
-    private float containerHeight;
-    private Color backgroundColor;
-    private Color borderColor;
-    private int borderSize;
-
     @OneToOne
-    private Project project;
-
+    private Node parentNode;
 }
