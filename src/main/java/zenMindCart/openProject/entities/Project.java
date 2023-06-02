@@ -23,5 +23,6 @@ public class Project {
     private Status status;
 
     @OneToOne
+    @JoinColumn(name = "parent_node_id")
     private Node parentNode;
 }

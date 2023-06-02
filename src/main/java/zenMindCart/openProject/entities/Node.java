@@ -25,6 +25,7 @@ public class Node {
     private int borderSize;
 
     @OneToOne
+    @JoinColumn(name = "project_id")
     private Project project;
 
 }
