@@ -23,9 +23,8 @@ public class Project {
 
     private Status status;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_node_id")
     @JsonManagedReference
-    @JsonSerialize
     private TextTreeNode parentNode;
 }

@@ -1,12 +1,13 @@
 package zenMindCart.openProject.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import zenMindCart.openProject.entities.classes.Text;
-import zenMindCart.openProject.entities.heritage.TreeNodeImpl;
-import zenMindCart.openProject.entities.interfaces.TreeNode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -14,42 +15,45 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@AttributeOverride(name = "id", column = @Column(name = "textNodeId"))
-public class TextTreeNode extends TreeNodeImpl {
-    private Text text;
+public class TextTreeNode {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @OneToOne(mappedBy = "parentNode")
+    private String text;
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "parentNode")
     @JsonBackReference
     private Project project;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private TreeNode parent;
-
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TreeNode> children;*/
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "parent_child_text_node",
-//            joinColumns = @JoinColumn(name = "parent_node_id", referencedColumnName = "textNodeId"),
-//            inverseJoinColumns = @JoinColumn(name = "child_node_id", referencedColumnName = "textNodeId"))
-//    private List<TreeNode> children;
-
-
-
-//    @Override
-//    public void addChild(TreeNode child) {
-//        children.add(child);
-//    }
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "parent_id")
+//    @JsonManagedReference
+//    private TextTreeNode parent;
 //
-//    @Override
-//    public void removeChild(TreeNode child) {
-//        children.remove(child);
-//    }
-//
-//    @Override
-//    public List<TreeNode> getChildren() {
-//        return children;
-//    }
+//    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonBackReference
+//    private List<TextTreeNode> children;
+
+    @ManyToMany
+    @JoinTable(
+            name = "parent_child_text_node",
+            joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
+    @Fetch(FetchMode.SELECT)
+    private List<TextTreeNode> children = new LinkedList<>();
+
+
+
+    public void addChild(TextTreeNode child) {
+        children.add(child);
+    }
+
+    public void removeChild(TextTreeNode child) {
+        children.remove(child);
+    }
+
+    public List<TextTreeNode> getChildren() {
+        return children;
+    }
 }
