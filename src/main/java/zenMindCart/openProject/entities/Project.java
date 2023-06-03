@@ -21,6 +21,7 @@ public class Project {
 
     private String title;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToOne(fetch = FetchType.EAGER)

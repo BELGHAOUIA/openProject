@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/Layout">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+</head>
+<body>
+<div layout:fragment="mindMap">
+    <div th:each="list : ${mindMap.children}">
+        <ul th:if="${list.children}">
+            <li th:each="item : ${list.children}">
+                <a th:if="${item.children == null}" th:text="${item.text}"></a>
+                <a th:if="${item.children != null}" th:text="${item.text}"></a>
+                <div th:if="${item.children != null}">
+                    <ul>
+                        <li th:each="subItem : ${item.children}">
+                            <a th:text="${subItem.text}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

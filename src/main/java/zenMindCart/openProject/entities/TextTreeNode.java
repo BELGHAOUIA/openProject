@@ -26,24 +26,25 @@ public class TextTreeNode {
     @JsonBackReference
     private Project project;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "parent_id")
-//    @JsonManagedReference
-//    private TextTreeNode parent;
-//
-//    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonBackReference
-//    private List<TextTreeNode> children;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("parent_child_nodes")
+    private TextTreeNode parent;
 
-    @ManyToMany
-    @JoinTable(
-            name = "parent_child_text_node",
-            joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "parent_id")
+    @JsonManagedReference("parent_child_nodes")
     @Fetch(FetchMode.SELECT)
-    private List<TextTreeNode> children = new LinkedList<>();
+    private List<TextTreeNode> children;
 
-
+//    @ManyToMany
+//    @JoinTable(
+//            name = "parent_child_text_node",
+//            joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
+//    @Fetch(FetchMode.SELECT)
+//    private List<TextTreeNode> children = new LinkedList<>();
+//
+//
 
     public void addChild(TextTreeNode child) {
         children.add(child);

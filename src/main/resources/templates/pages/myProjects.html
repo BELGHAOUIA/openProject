@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/Layout" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+</head>
+<body>
+<div layout:fragment="projects">
+      <button>Add New Project</button>
+
+      <h1>My Projects List</h1>
+      <ul>
+          <li th:each="project : ${projects}">
+              <a th:href="@{/project/{id}(id=${project.id})}" th:text="${project.title}"></a>
+          </li>
+      </ul>
+</div>
+</body>
+</html>
