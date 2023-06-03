@@ -1,21 +1,24 @@
-package zenMindCart.openProject.entities;
+package zenMindCart.openProject.entities.heritage;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import zenMindCart.openProject.entities.Project;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.util.List;
 
-@Entity
+
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class Node {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "node_id")
     private int id;
 
     private float containerWidth;
@@ -23,8 +26,4 @@ public class Node {
     private Color backgroundColor;
     private Color borderColor;
     private int borderSize;
-
-    @OneToOne(mappedBy = "parentNode")
-    private Project project;
-
 }

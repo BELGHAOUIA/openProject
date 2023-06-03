@@ -1,16 +1,19 @@
 package zenMindCart.openProject.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.*;
 import zenMindCart.openProject.constantes.enumerations.Status;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Project {
 
     @Id
@@ -24,5 +27,7 @@ public class Project {
 
     @OneToOne
     @JoinColumn(name = "parent_node_id")
-    private Node parentNode;
+    @JsonManagedReference
+    @JsonSerialize
+    private TextNode parentNode;
 }
