@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TreeNodeImpl implements TreeNode {
+public abstract class TreeNodeImpl implements TreeNode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,25 +29,12 @@ public class TreeNodeImpl implements TreeNode {
     private Color borderColor;
     private int borderSize;
 
-   // @ManyToOne(fetch = FetchType.LAZY)
-   // @JoinColumn(name = "parent_id")
-    private TreeNode parent;
-
-   // @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TreeNode> children;
+    @Override
+    public abstract void addChild(TreeNode child);
 
     @Override
-    public void addChild(TreeNode child) {
-        children.add(child);
-    }
+    public abstract void removeChild(TreeNode child);
 
     @Override
-    public void removeChild(TreeNode child) {
-        children.remove(child);
-    }
-
-    @Override
-    public List<TreeNode> getChildren() {
-        return children;
-    }
+    public abstract List<TreeNode> getChildren();
 }

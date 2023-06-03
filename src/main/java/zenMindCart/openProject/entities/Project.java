@@ -24,9 +24,9 @@ public class Project {
 
     private Status status;
 
-   /* @OneToOne
+    @OneToOne
     @JoinColumn(name = "parent_node_id")
     @JsonManagedReference
     @JsonSerialize
-    private TextTreeNodeImpl parentNode;*/
+    private TextTreeNode parentNode;
 }
