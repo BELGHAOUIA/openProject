@@ -1,5 +1,6 @@
 package zenMindCart.openProject.entities.heritage;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import zenMindCart.openProject.entities.interfaces.TreeNode;
 
@@ -16,7 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class TreeNodeImpl implements TreeNode {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TreeNodeImpl implements TreeNode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +31,34 @@ public abstract class TreeNodeImpl implements TreeNode {
     private Color borderColor;
     private int borderSize;
 
-    @Override
-    public abstract void addChild(TreeNode child);
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private TreeNode parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TreeNode> children;
 
     @Override
-    public abstract void removeChild(TreeNode child);
+    public void addChild(TreeNode child) {
+        children.add(child);
+    }
 
     @Override
-    public abstract List<TreeNode> getChildren();
+    public void removeChild(TreeNode child) {
+        children.remove(child);
+    }
+
+    @Override
+    public List<TreeNode> getChildren() {
+        return children;
+    }
+
+//    @Override
+//    public abstract void addChild(TreeNode child);
+//
+//    @Override
+//    public abstract void removeChild(TreeNode child);
+//
+//    @Override
+//    public abstract List<TreeNode> getChildren();
 }

@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 public class Project {
