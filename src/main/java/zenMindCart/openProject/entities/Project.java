@@ -6,7 +6,6 @@ import lombok.*;
 import zenMindCart.openProject.constantes.enumerations.Status;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @AllArgsConstructor
@@ -25,9 +24,9 @@ public class Project {
 
     private Status status;
 
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name = "parent_node_id")
     @JsonManagedReference
     @JsonSerialize
-    private TextNode parentNode;
+    private TextTreeNodeImpl parentNode;*/
 }

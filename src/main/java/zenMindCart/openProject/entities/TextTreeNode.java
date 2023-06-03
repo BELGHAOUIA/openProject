@@ -1,13 +1,10 @@
 package zenMindCart.openProject.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
-import zenMindCart.openProject.entities.heritage.Node;
+import zenMindCart.openProject.entities.classes.Text;
+import zenMindCart.openProject.entities.heritage.TreeNodeImpl;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -17,11 +14,9 @@ import java.util.List;
 @Setter
 
 @AttributeOverride(name = "id", column = @Column(name = "textNodeId"))
-public class TextNode extends Node {
-    private Color textColor;
-    private Font fontFamily;
-    private float textSize;
-
+public class TextTreeNode extends TreeNodeImpl {
+    private Text text;
+/*
     @OneToOne(mappedBy = "parentNode")
     @JsonBackReference
     @JsonSerialize
@@ -32,5 +27,5 @@ public class TextNode extends Node {
             name = "parent_child_node",
             joinColumns = @JoinColumn(name = "parent_node_id", referencedColumnName = "textNodeId"),
             inverseJoinColumns = @JoinColumn(name = "child_node_id", referencedColumnName = "textNodeId"))
-    private List<TextNode> nodes;
+    private List<TextTreeNodeImpl> nodes;*/
 }

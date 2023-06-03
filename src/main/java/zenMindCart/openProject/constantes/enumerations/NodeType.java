@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum NodeType {
-    TEXT_NODE("Text Node"),
-    IMAGE_NODE("Image Node");
+    TEXT_NODE("Text TreeNodeImpl"),
+    IMAGE_NODE("Image TreeNodeImpl");
 
     private final String name;
 }
